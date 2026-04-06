@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include "OPT.CPP"
 using namespace std;
 
 int main() {
@@ -41,7 +42,9 @@ int main() {
     //convert to vector
     vector<char> A(strA.begin(), strA.end());
     vector<char> B(strB.begin(), strB.end());
-
+    // insert empty char for DP algorithm when filling table
+    A.insert(A.begin(), ' ');
+    B.insert(B.begin(), ' ');
 
     cout << "K = " << K << endl;
     for (auto it: alphabet) {
@@ -54,7 +57,10 @@ int main() {
     for (int i = 0; i < B.size(); i++) {
         cout << B[i] << " ";
     }
+    cout << endl;
 
+    int results = opt(alphabet, A, B);
+    cout << results << endl;
 
     return 0;
 }
