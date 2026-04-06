@@ -12,21 +12,22 @@ using namespace std;
 
 int opt(map<char, int> alphabet, vector<char> A, vector<char> B) {
     //creating 2D vector for memorization
-    vector<vector<int>> M(A.size() +1 , vector<int>(B.size() +1, 0));
-
+    vector<vector<int>> M(A.size(), vector<int>(B.size(), 0));
     //base cases of filling first row and col with 0
-    for (int i = 0; i <= A.size(); i++) {
+    for (int i = 0; i < A.size(); i++) {
         M[i][0] = 0;
     }
-    for (int j = 0; j <= B.size(); j++) {
+    for (int j = 0; j < B.size(); j++) {
         M[0][j] = 0;
     }
 
     // opt for loop
-    for (int i = 1; i <= A.size(); i++) {
-        for (int j = 1; j <= B.size(); j++) {
+    for (int i = 1; i < A.size(); i++) {
+        for (int j = 1; j < B.size(); j++) {
             if (A[i] == B[j]) {
-                M[i][j] = max({ (alphabet[A[i]] + M[i - 1][j - 1]), M[i - 1][j], M[i][j-1]});
+                M[i][j] = max({ (alphabet[A[i]] + M[i - 1][j - 1]),
+                    M[i - 1][j],
+                    M[i][j-1]});
             }
             else {
                 M[i][j] = max(M[i - 1][j], M[i][j - 1]);
@@ -49,5 +50,5 @@ int opt(map<char, int> alphabet, vector<char> A, vector<char> B) {
         std::cout << '\n';
     }
 
-    return M[A.size()][B.size()];
+    return M[A.size()-1][B.size()-1];
 }
