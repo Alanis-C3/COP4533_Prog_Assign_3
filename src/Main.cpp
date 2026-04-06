@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include "OPT.CPP"
+#include "Backtracking.cpp"
 using namespace std;
 
 int main() {
@@ -59,8 +60,21 @@ int main() {
     }
     cout << endl;
 
-    int results = opt(alphabet, A, B);
-    cout << results << endl;
+    // data structure declared for momoization in the opt function and backtracking
+    vector<vector<int>> M;
+
+    int results = opt(alphabet, A, B, M);
+    cout << "Maximum Value = " << results << endl;
+
+    vector<char> optSequence = backtracking(M, alphabet, A, B);
+    cout << "Optimal Sequence = [";
+    for (int i = 0; i<optSequence.size(); i++){
+        if (i+1 == optSequence.size()){
+            cout << optSequence[i] << "]";
+        } else {
+            cout << optSequence[i] << ", ";
+        }
+    }
 
     return 0;
 }

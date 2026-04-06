@@ -10,7 +10,7 @@
 using namespace std;
 
 
-int opt(map<char, int> alphabet, vector<char> A, vector<char> B) {
+int opt(map<char, int> alphabet, vector<char> A, vector<char> B, vector<vector<int>>& M) {
     //creating 2D vector for memorization
     vector<vector<int>> M(A.size(), vector<int>(B.size(), 0));
     // 2d vector creation source : https://www.geeksforgeeks.org/cpp/2d-vector-in-cpp-with-user-defined-size/
