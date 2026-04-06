@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <algorithm>
 #include "OPT.CPP"
 #include "Backtracking.cpp"
 #include "Generator.cpp"
@@ -9,7 +10,8 @@ using namespace std;
 
 int main() {
     vector<string> fileList = generator();
-
+    // vector of pairs to hold runtimes and A*B
+    vector<pair<int, float>> runtimes;
     for (string file : fileList){
 
         map<char, int> alphabet;
@@ -66,7 +68,8 @@ int main() {
         // 2d vector creation source : https://www.geeksforgeeks.org/cpp/2d-vector-in-cpp-with-user-defined-size/
         vector<vector<int>> M(A.size(), vector<int>(B.size(), 0));
 
-        int results = opt(alphabet, A, B, M);
+
+        int results = opt(alphabet, A, B, M, runtimes);
         cout << "Maximum Value = " << results << endl;
 
         vector<char> optSequence = backtracking(M, alphabet, A, B);
@@ -81,6 +84,12 @@ int main() {
         cout << "\n";
     }
 
+    sort(runtimes.begin(), runtimes.end());
+    ofstream runTimeFile("../outputs/runtime.csv");
+    for (const auto& time : runtimes) {
+        runTimeFile << time.first << "," << time.second << endl;
+    }
+    runTimeFile.close();
 
     return 0;
 }
