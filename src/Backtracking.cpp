@@ -3,10 +3,8 @@
 #include <fstream>
 #include <map>
 #include <string>
-#include <sstream>
 #include <algorithm>
-#include <iomanip>
-#pragma once
+
 using namespace std;
 
 vector<char> backtracking(vector<vector<int>>& M, map<char, int> alphabet, vector<char> A, vector<char> B) {
@@ -40,6 +38,21 @@ vector<char> backtracking(vector<vector<int>>& M, map<char, int> alphabet, vecto
     }
     // reverse the sequence, since we did pushbacks in O(1) rather than inserts in O(n)
     reverse(optSequence.begin(), optSequence.end());
+
+    // create an output file
+    string fileName = "../outputs/example" + to_string(A.size()) + "out.txt";
+    ofstream outFile(fileName);
+    if (!outFile.is_open())
+    {
+        cout << "Error in creating file!" << endl;
+    }
+    else {
+        for (int k = 0; k<optSequence.size(); k++){
+            outFile << optSequence[k] << " ";
+        }
+        outFile.close();
+    }
+
     return optSequence;
 
 }

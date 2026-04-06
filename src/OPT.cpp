@@ -11,9 +11,7 @@ using namespace std;
 
 
 int opt(map<char, int> alphabet, vector<char> A, vector<char> B, vector<vector<int>>& M) {
-    //creating 2D vector for memorization
-    vector<vector<int>> M(A.size(), vector<int>(B.size(), 0));
-    // 2d vector creation source : https://www.geeksforgeeks.org/cpp/2d-vector-in-cpp-with-user-defined-size/
+
     //base cases of filling first row and col with 0
     for (int i = 0; i < A.size(); i++) {
         M[i][0] = 0;
@@ -37,19 +35,19 @@ int opt(map<char, int> alphabet, vector<char> A, vector<char> B, vector<vector<i
     }
 
     // print M for testing
-    int maxVal = 0;
-    for (const auto& row : M)
-        for (int v : row)
-            if (v > maxVal) maxVal = v;
-
-    int width = static_cast<int>(std::to_string(maxVal).size()) + 2;
-
-    for (const auto& row : M) {
-        for (int v : row) {
-            std::cout << std::setw(width) << v;
-        }
-        std::cout << '\n';
-    }
+//    int maxVal = 0;
+//    for (const auto& row : M)
+//        for (int v : row)
+//            if (v > maxVal) maxVal = v;
+//
+//    int width = static_cast<int>(std::to_string(maxVal).size()) + 2;
+//
+//    for (const auto& row : M) {
+//        for (int v : row) {
+//            std::cout << std::setw(width) << v;
+//        }
+//        std::cout << '\n';
+//    }
 
     return M[A.size()-1][B.size()-1];
 }
